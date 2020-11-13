@@ -2,8 +2,12 @@ package service;
 
 import model.Bid;
 import model.BidWrap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ReadFileThread extends Thread {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ReadFileThread.class);
 
     private BidQueues queues;
 
@@ -22,7 +26,7 @@ public class ReadFileThread extends Thread {
         for (BidWrap bidWrap : bids) {
             Bid bid = bidWrap.getBid();
             if (queues.add(bid)) {
-                LogBid.print(bid);
+                LOGGER.info("Added to queue: {}", bid);
             }
         }
     }

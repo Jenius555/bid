@@ -1,8 +1,14 @@
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import service.BidQueues;
 import service.ReadFileThread;
 
 
 public class TestBid {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(TestBid.class);
+    private static final long DELAY = 60000;
+
     public static void main(String[] args) {
 
         BidQueues queues = new BidQueues();
@@ -11,9 +17,9 @@ public class TestBid {
             ReadFileThread readFileThread = new ReadFileThread(queues);
             readFileThread.start();
             try {
-                Thread.sleep(60000);
+                Thread.sleep(DELAY);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                LOGGER.error("Error read or parse file: {}", e.getMessage(), e);
             }
         }
     }

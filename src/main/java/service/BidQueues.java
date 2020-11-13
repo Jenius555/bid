@@ -1,12 +1,16 @@
 package service;
 
 import model.Bid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class BidQueues {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(BidQueues.class);
 
     private Map<String, LinkedBlockingQueue<BidThread>> queues;
 
@@ -26,7 +30,7 @@ public class BidQueues {
     }
 
     public void printStatus() {
-        queues.forEach((k, v) -> System.out.println("type: " + k + ", size:" + v.size()));
+        queues.forEach((k, v) -> LOGGER.info("type: {}, size: {}", k, v.size()));
     }
 
 }
